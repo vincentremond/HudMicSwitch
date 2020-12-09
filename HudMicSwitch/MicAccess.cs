@@ -1,37 +1,45 @@
-﻿using System.Linq;
-using NAudio.CoreAudioApi;
+﻿using System;
 
 namespace HudMicSwitch
 {
-    public static class MicAccess
+    public class MicAccess : IDisposable
     {
-        public record DeviceSpecs(string FriendlyName, DataFlow DeviceType);
+        private readonly VoiceMeterClient _voiceMeterClient;
 
-        private static readonly DeviceSpecs _voiceMeeterOutput = new("VoiceMeeter Output (VB-Audio VoiceMeeter VAIO)", DataFlow.Capture);
-        private static readonly DeviceSpecs _cableInput = new ("CABLE Input (VB-Audio Virtual Cable)", DataFlow.Render);
-        private static readonly DeviceSpecs _cableOutput = new ("CABLE Output (VB-Audio Virtual Cable)", DataFlow.Capture);
-
-        public static void MicOn()
+        public MicAccess()
         {
-            SetLevel(_voiceMeeterOutput, 100.Percent());
-            SetLevel(_cableOutput, 20.Percent());
+            _voiceMeterClient = new VoiceMeterClient(null);
         }
 
-        public static void MicOff()
+        public void MicOn()
         {
-            SetLevel(_voiceMeeterOutput, 0.Percent());
-            SetLevel(_cableOutput, 100.Percent());
+            _voiceMeterClient.SetParam("Strip[0].Mute", 0f);
+            _voiceMeterClient.SetParam("Strip[1].Mute", 0f);
+            _voiceMeterClient.SetParam("Strip[2].Gain", -22.0f);
         }
 
-        private static void SetLevel(DeviceSpecs deviceSpecs, float level)
+        public void MicOff()
         {
-            using var deviceEnumerator = new MMDeviceEnumerator();
-            var devices = deviceEnumerator.EnumerateAudioEndPoints(deviceSpecs.DeviceType, DeviceState.Active).ToArray();
-            var device = devices.SingleOrDefault(d => d.FriendlyName == deviceSpecs.FriendlyName);
-            if (device != null)
-            {
-                device.AudioEndpointVolume.MasterVolumeLevelScalar = level;
-            }
+            _voiceMeterClient.SetParam("Strip[0].Mute", 1f);
+            _voiceMeterClient.SetParam("Strip[1].Mute", 1f);
+            _voiceMeterClient.SetParam("Strip[2].Gain", 0f);
         }
+
+        public void Dispose() => _voiceMeterClient?.Dispose();
+
+        public MicState GetCurrentState()
+        {
+            var isMuted1 = Convert.ToBoolean(_voiceMeterClient.GetParam("Strip[0].Mute"));
+            var isMuted2 = Convert.ToBoolean(_voiceMeterClient.GetParam("Strip[1].Mute"));
+            return isMuted1 && isMuted2
+                ? MicState.On
+                : MicState.Off;
+        }
+    }
+
+    public enum MicState
+    {
+        On,
+        Off,
     }
 }

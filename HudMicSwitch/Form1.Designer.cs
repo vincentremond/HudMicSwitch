@@ -28,45 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnTalk = new System.Windows.Forms.Button();
-            this.btnBTW = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // btnTalk
+            // label1
             // 
-            this.btnTalk.Location = new System.Drawing.Point(12, 12);
-            this.btnTalk.Name = "btnTalk";
-            this.btnTalk.Size = new System.Drawing.Size(274, 91);
-            this.btnTalk.TabIndex = 0;
-            this.btnTalk.Text = "Talk";
-            this.btnTalk.UseVisualStyleBackColor = true;
-            this.btnTalk.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // btnBTW
-            // 
-            this.btnBTW.Location = new System.Drawing.Point(12, 109);
-            this.btnBTW.Name = "btnBTW";
-            this.btnBTW.Size = new System.Drawing.Size(274, 91);
-            this.btnBTW.TabIndex = 1;
-            this.btnBTW.Text = "Back to work";
-            this.btnBTW.UseVisualStyleBackColor = true;
-            this.btnBTW.Click += new System.EventHandler(this.btnBTW_Click);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 30);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "label1";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.DoubleClick += new System.EventHandler(this.label1_DoubleClick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(298, 205);
-            this.Controls.Add(this.btnBTW);
-            this.Controls.Add(this.btnTalk);
+            this.ClientSize = new System.Drawing.Size(70, 30);
+            this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Form1";
             this.ResumeLayout(false);
         }
 
-        private System.Windows.Forms.Button btnBTW;
-
-        private System.Windows.Forms.Button btnTalk;
+        private System.Windows.Forms.Label label1;
 
         #endregion
     }

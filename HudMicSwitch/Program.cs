@@ -11,10 +11,18 @@ namespace HudMicSwitch
         [STAThread]
         static void Main()
         {
-            Application.SetHighDpiMode(HighDpiMode.SystemAware);
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            try
+            {
+                using var micAccess = new MicAccess();
+                Application.SetHighDpiMode(HighDpiMode.SystemAware);
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new Form1(micAccess));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString(), "Error", MessageBoxButtons.OK);
+            }
         }
     }
 }

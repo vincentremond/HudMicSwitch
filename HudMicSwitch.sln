@@ -6,13 +6,10 @@ MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".global", ".global", "{63F16E5D-C09D-4B80-B8A0-70B6B7E1B495}"
 ProjectSection(SolutionItems) = preProject
 	paket.dependencies = paket.dependencies
+	README.md = README.md
 EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HudMicSwitch", "HudMicSwitch\HudMicSwitch.csproj", "{6F961D7F-493D-44C8-878A-3657175228E6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HudMicSwitch.Tests", "HudMicSwitch.Tests\HudMicSwitch.Tests.csproj", "{9DEB9859-DF0C-4927-AD2A-866A125F5265}"
-EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "HudMicSwitch.Lib", "HudMicSwitch.Lib\HudMicSwitch.Lib.fsproj", "{68B08C1D-8F20-4603-B923-E84AD47C3C55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,29 +36,5 @@ Global
 		{6F961D7F-493D-44C8-878A-3657175228E6}.Release|x64.Build.0 = Release|Any CPU
 		{6F961D7F-493D-44C8-878A-3657175228E6}.Release|x86.ActiveCfg = Release|Any CPU
 		{6F961D7F-493D-44C8-878A-3657175228E6}.Release|x86.Build.0 = Release|Any CPU
-		{9DEB9859-DF0C-4927-AD2A-866A125F5265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9DEB9859-DF0C-4927-AD2A-866A125F5265}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9DEB9859-DF0C-4927-AD2A-866A125F5265}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{9DEB9859-DF0C-4927-AD2A-866A125F5265}.Debug|x64.Build.0 = Debug|Any CPU
-		{9DEB9859-DF0C-4927-AD2A-866A125F5265}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{9DEB9859-DF0C-4927-AD2A-866A125F5265}.Debug|x86.Build.0 = Debug|Any CPU
-		{9DEB9859-DF0C-4927-AD2A-866A125F5265}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9DEB9859-DF0C-4927-AD2A-866A125F5265}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9DEB9859-DF0C-4927-AD2A-866A125F5265}.Release|x64.ActiveCfg = Release|Any CPU
-		{9DEB9859-DF0C-4927-AD2A-866A125F5265}.Release|x64.Build.0 = Release|Any CPU
-		{9DEB9859-DF0C-4927-AD2A-866A125F5265}.Release|x86.ActiveCfg = Release|Any CPU
-		{9DEB9859-DF0C-4927-AD2A-866A125F5265}.Release|x86.Build.0 = Release|Any CPU
-		{68B08C1D-8F20-4603-B923-E84AD47C3C55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68B08C1D-8F20-4603-B923-E84AD47C3C55}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{68B08C1D-8F20-4603-B923-E84AD47C3C55}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{68B08C1D-8F20-4603-B923-E84AD47C3C55}.Debug|x64.Build.0 = Debug|Any CPU
-		{68B08C1D-8F20-4603-B923-E84AD47C3C55}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{68B08C1D-8F20-4603-B923-E84AD47C3C55}.Debug|x86.Build.0 = Debug|Any CPU
-		{68B08C1D-8F20-4603-B923-E84AD47C3C55}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{68B08C1D-8F20-4603-B923-E84AD47C3C55}.Release|Any CPU.Build.0 = Release|Any CPU
-		{68B08C1D-8F20-4603-B923-E84AD47C3C55}.Release|x64.ActiveCfg = Release|Any CPU
-		{68B08C1D-8F20-4603-B923-E84AD47C3C55}.Release|x64.Build.0 = Release|Any CPU
-		{68B08C1D-8F20-4603-B923-E84AD47C3C55}.Release|x86.ActiveCfg = Release|Any CPU
-		{68B08C1D-8F20-4603-B923-E84AD47C3C55}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
