@@ -1,1 +1,3 @@
-NAudio
+Microsoft.Extensions.Logging.Abstractions
+NHotkey
+NHotkey.WindowsForms
