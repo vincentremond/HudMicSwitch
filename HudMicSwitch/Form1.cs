@@ -6,11 +6,14 @@ using NHotkey.WindowsForms;
 
 namespace HudMicSwitch
 {
-    public partial class Form1 : Form
+    public sealed partial class Form1 : Form
     {
         private MicState _currentState;
         private readonly MicAccess _micAccess;
         private readonly Timer _blinkTimer;
+
+        // Hide from alt-tab
+        protected override CreateParams CreateParams => base.CreateParams.With(createParams => createParams.ExStyle |= 0x80);
 
         public Form1(MicAccess micAccess)
         {
@@ -26,7 +29,7 @@ namespace HudMicSwitch
                 Enabled = false,
             };
             _blinkTimer.Tick += BlinkTimerOnTick;
-            HotkeyManager.Current.AddOrReplace("ToggleMute", Keys.Pause, noRepeat: true, Handler);
+            HotkeyManager.Current.AddOrReplace("ToggleMute", Keys.Pause, noRepeat: true, ToggleMute);
             SetCurrentState(_micAccess.GetCurrentState());
         }
 
@@ -70,7 +73,9 @@ namespace HudMicSwitch
             _micAccess.MicOff();
         }
 
-        private void Handler(object? sender, HotkeyEventArgs e) => SetCurrentState(Invert(_currentState));
+        private void ToggleMute(object? _, HotkeyEventArgs __) => ToggleMute();
+
+        private void ToggleMute() => SetCurrentState(Invert(_currentState));
 
         private MicState Invert(MicState currentState) =>
             currentState switch
@@ -80,9 +85,16 @@ namespace HudMicSwitch
                 _ => throw new ArgumentOutOfRangeException(nameof(currentState), currentState, null)
             };
 
-        private void label1_DoubleClick(object sender, EventArgs e)
+        private void label1_Click(object _, MouseEventArgs eventArgs) =>
+            ((Action) (eventArgs.Button switch
+            {
+                MouseButtons.Left => ToggleMute,
+                MouseButtons.Right => Close,
+                _ => Noop
+            }))();
+
+        private static void Noop()
         {
-            Close();
         }
     }
 }

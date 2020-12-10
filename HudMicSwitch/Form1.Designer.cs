@@ -1,6 +1,8 @@
-﻿namespace HudMicSwitch
+﻿using System.Windows.Forms;
+
+namespace HudMicSwitch
 {
-    partial class Form1
+    sealed partial class Form1
     {
         /// <summary>
         ///  Required designer variable.
@@ -41,7 +43,7 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "label1";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.DoubleClick += new System.EventHandler(this.label1_DoubleClick);
+            this.label1.MouseClick += new MouseEventHandler(this.label1_Click);
             // 
             // Form1
             // 

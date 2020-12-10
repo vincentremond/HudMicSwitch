@@ -1,8 +1,8 @@
-﻿namespace VoiceMeeterWrapper
+﻿namespace HudMicSwitch
 {
     public enum VbLoginResponse
     {
-        OK = 0,
+        Ok = 0,
         OkVoiceMeeterNotRunning = 1,
         NoClient = -1,
         AlreadyLoggedIn = -2,
