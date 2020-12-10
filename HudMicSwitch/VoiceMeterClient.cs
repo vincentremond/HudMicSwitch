@@ -1,14 +1,13 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
-using VoiceMeeterWrapper;
 
 namespace HudMicSwitch
 {
     public class VoiceMeterClient : IDisposable
     {
-        private readonly ILogger<VoiceMeterClient> _logger;
+        private readonly ILogger<VoiceMeterClient>? _logger;
 
-        public VoiceMeterClient(ILogger<VoiceMeterClient> logger)
+        public VoiceMeterClient(ILogger<VoiceMeterClient>? logger)
         {
             _logger = logger;
             Login();
@@ -16,11 +15,13 @@ namespace HudMicSwitch
 
         private void Login()
         {
+            Logout();
             var loginResponse = VoiceMeeterRemote.Login();
 
             var info = loginResponse switch
             {
-                VbLoginResponse.OK => "Attached.",
+                VbLoginResponse.Ok => "Attached.",
+                VbLoginResponse.OkVoiceMeeterNotRunning => "Attached but VoiceMeeter is not running.",
                 VbLoginResponse.AlreadyLoggedIn => "Attached. Was already logged in",
                 _ => throw new InvalidOperationException("Bad response from VoiceMeeter: " + loginResponse),
             };
@@ -41,7 +42,13 @@ namespace HudMicSwitch
 
         public void Dispose()
         {
-            VoiceMeeterRemote.Logout();
+            Logout();
+        }
+
+        private void Logout()
+        {
+            var logoutResponse = VoiceMeeterRemote.Logout();
+            _logger?.LogInformation($"Logged out {logoutResponse}");
         }
     }
 }

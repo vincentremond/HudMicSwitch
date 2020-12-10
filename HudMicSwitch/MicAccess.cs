@@ -25,7 +25,7 @@ namespace HudMicSwitch
             _voiceMeterClient.SetParam("Strip[2].Gain", 0f);
         }
 
-        public void Dispose() => _voiceMeterClient?.Dispose();
+        public void Dispose() => _voiceMeterClient.Dispose();
 
         public MicState GetCurrentState()
         {
