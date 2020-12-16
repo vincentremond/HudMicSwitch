@@ -2,7 +2,7 @@
 
 namespace HudMicSwitch
 {
-    sealed partial class Form1
+    internal sealed partial class Form1
     {
         /// <summary>
         ///  Required designer variable.

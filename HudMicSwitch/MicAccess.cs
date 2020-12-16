@@ -2,7 +2,7 @@
 
 namespace HudMicSwitch
 {
-    public class MicAccess : IDisposable
+    internal class MicAccess : IDisposable
     {
         private readonly VoiceMeterClient _voiceMeterClient;
 
@@ -37,7 +37,7 @@ namespace HudMicSwitch
         }
     }
 
-    public enum MicState
+    internal enum MicState
     {
         On,
         Off,

@@ -1,6 +1,6 @@
 ﻿namespace HudMicSwitch
 {
-    public enum VbLoginResponse
+    internal enum VbLoginResponse
     {
         Ok = 0,
         OkVoiceMeeterNotRunning = 1,
