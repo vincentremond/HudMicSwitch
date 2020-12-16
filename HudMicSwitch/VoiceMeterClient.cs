@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace HudMicSwitch
 {
-    public class VoiceMeterClient : IDisposable
+    internal class VoiceMeterClient : IDisposable
     {
         private readonly ILogger<VoiceMeterClient>? _logger;
 

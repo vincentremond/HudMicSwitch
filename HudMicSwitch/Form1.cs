@@ -6,7 +6,7 @@ using NHotkey.WindowsForms;
 
 namespace HudMicSwitch
 {
-    public sealed partial class Form1 : Form
+    internal sealed partial class Form1 : Form
     {
         private MicState _currentState;
         private readonly MicAccess _micAccess;

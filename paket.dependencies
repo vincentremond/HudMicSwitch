@@ -2,6 +2,7 @@ source https://api.nuget.org/v3/index.json
 
 storage: none
 framework: net5.0
-nuget Microsoft.Extensions.Logging.Abstractions 5.0.0
+nuget CommandLineParser
+nuget Microsoft.Extensions.Logging.Abstractions
 nuget NHotkey
 nuget NHotkey.WindowsForms

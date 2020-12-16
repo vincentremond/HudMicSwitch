@@ -2,7 +2,7 @@
 
 namespace HudMicSwitch
 {
-    public static class Helpers
+    internal static class Helpers
     {
         public static T With<T>(this T obj, Action<T> set)
         {
