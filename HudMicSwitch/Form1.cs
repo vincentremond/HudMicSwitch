@@ -30,6 +30,7 @@ namespace HudMicSwitch
             };
             _blinkTimer.Tick += BlinkTimerOnTick;
             HotkeyManager.Current.AddOrReplace("ToggleMute", Keys.Pause, noRepeat: true, ToggleMute);
+            HotkeyManager.Current.AddOrReplace("ResetConfig", Keys.Alt | Keys.Pause, noRepeat: true, ResetConfig);
             SetCurrentState(_micAccess.GetCurrentState());
         }
 
@@ -74,6 +75,12 @@ namespace HudMicSwitch
         }
 
         private void ToggleMute(object? _, HotkeyEventArgs __) => ToggleMute();
+
+        private void ResetConfig(object? sender, HotkeyEventArgs e)
+        {
+            _micAccess.ResetConfig();
+            MessageBox.Show("Configuration has been reset", "Config reset", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
         private void ToggleMute() => SetCurrentState(Invert(_currentState));
 

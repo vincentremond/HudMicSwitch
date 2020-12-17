@@ -14,6 +14,6 @@ Creates a heads-up display with a global hotkey indicating if microphone is on o
 
 ## TODO
 
-- [ ] Use config file
-- [ ] Test app
-- [ ] Force reset input config (on start ? on key press ?)
+- [x] Use config file
+- [x] Test app
+- [x] Force reset input config (~~on start ?~~ on key press ? `Alt` + `Pause` )

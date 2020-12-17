@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace HudMicSwitch
+namespace HudMicSwitch.Lib
 {
     internal static class VoiceMeeterRemote
     {

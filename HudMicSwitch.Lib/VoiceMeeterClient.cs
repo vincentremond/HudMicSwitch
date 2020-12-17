@@ -1,13 +1,13 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
 
-namespace HudMicSwitch
+namespace HudMicSwitch.Lib
 {
-    internal class VoiceMeterClient : IDisposable
+    public class VoiceMeeterClient : IDisposable
     {
-        private readonly ILogger<VoiceMeterClient>? _logger;
+        private readonly ILogger<VoiceMeeterClient>? _logger;
 
-        public VoiceMeterClient(ILogger<VoiceMeterClient>? logger)
+        public VoiceMeeterClient(ILogger<VoiceMeeterClient>? logger)
         {
             _logger = logger;
             Login();

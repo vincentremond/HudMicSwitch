@@ -2,11 +2,10 @@
 
 namespace HudMicSwitch
 {
-    internal class Config
-    {
-        public IDictionary<string, string> Check { get; set; }
-        public IDictionary<string, string> On { get; set; }
-        public IDictionary<string, string> Off { get; set; }
-        public IDictionary<string, string> CheckIsOff { get; set; }
-    }
+    internal record Config(
+        IReadOnlyDictionary<string, string> Reset,
+        IReadOnlyDictionary<string, string> On,
+        IReadOnlyDictionary<string, string> Off,
+        IReadOnlyDictionary<string, string> CheckIsOff
+    );
 }
