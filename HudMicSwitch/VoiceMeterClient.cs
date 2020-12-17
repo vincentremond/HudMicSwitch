@@ -33,6 +33,11 @@ namespace HudMicSwitch
             VoiceMeeterRemote.SetParameter(n, v);
         }
 
+        public void SetParam(string n, string v)
+        {
+            VoiceMeeterRemote.SetParameter(n, v);
+        }
+
         public float GetParam(string n)
         {
             float output = -1;

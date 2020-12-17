@@ -19,9 +19,11 @@ namespace HudMicSwitch
         {
             try
             {
+                var config = ReadConfig("config.yml");
+            
                 WaitSomeTime(options.SecondsToWait);
                 KillOtherInstances();
-                using var micAccess = new MicAccess();
+                using var micAccess = new MicAccess(config);
                 Application.SetHighDpiMode(HighDpiMode.SystemAware);
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
@@ -32,6 +34,8 @@ namespace HudMicSwitch
                 MessageBox.Show(e.ToString(), @"Error", MessageBoxButtons.OK);
             }
         }
+
+        private static Config ReadConfig(string configYml) => Yaml.GetFromFile<Config>(configYml);
 
         private static void WaitSomeTime(in int secondsToWait)
         {
