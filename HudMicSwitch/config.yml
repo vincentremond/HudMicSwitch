@@ -1,0 +1,24 @@
+﻿Check:
+  'Strip[0].B1': 0
+  'Strip[0].device.wdm': "Microphone (5- Logitech G733 Gaming Headset)"
+  
+  'Strip[1].B1': 1
+  'Strip[1].device.wdm': "Microphone (Yeti X)"
+  
+  'Bus[0].device.wdm': "QC35 (Q35 Stereo)"
+  'Bus[1].device.wdm': ""
+  'Bus[2].device.wdm': ""
+  
+On:
+  'Strip[0].Mute': 0 
+  'Strip[1].Mute': 0 
+  'Strip[2].Gain': -22
+  
+Off:
+  'Strip[0].Mute': 1
+  'Strip[1].Mute': 1
+  'Strip[2].Gain': 0
+  
+CheckIsOff:
+  Strip[0].Mute: 1
+  Strip[1].Mute: 1

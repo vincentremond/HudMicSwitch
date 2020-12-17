@@ -1,39 +1,52 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace HudMicSwitch
 {
     internal class MicAccess : IDisposable
     {
         private readonly VoiceMeterClient _voiceMeterClient;
+        private readonly Config _config;
 
-        public MicAccess()
+        public MicAccess(Config config)
         {
+            _config = config;
             _voiceMeterClient = new VoiceMeterClient(null);
         }
 
-        public void MicOn()
-        {
-            _voiceMeterClient.SetParam("Strip[0].Mute", 0f);
-            _voiceMeterClient.SetParam("Strip[1].Mute", 0f);
-            _voiceMeterClient.SetParam("Strip[2].Gain", -22.0f);
-        }
+        public void MicOn() => SetVariables(_config.On);
+        public void MicOff() => SetVariables(_config.Off);
 
-        public void MicOff()
+        private void SetVariables(IDictionary<string, string> variables)
         {
-            _voiceMeterClient.SetParam("Strip[0].Mute", 1f);
-            _voiceMeterClient.SetParam("Strip[1].Mute", 1f);
-            _voiceMeterClient.SetParam("Strip[2].Gain", 0f);
+            foreach (var (key, value) in variables)
+            {
+                if (float.TryParse(value, out var floatValue))
+                {
+                    _voiceMeterClient.SetParam(key, floatValue);
+                }
+                else
+                {
+                    _voiceMeterClient.SetParam(key, value);
+                }
+            }
         }
 
         public void Dispose() => _voiceMeterClient.Dispose();
 
         public MicState GetCurrentState()
         {
-            var isMuted1 = Convert.ToBoolean(_voiceMeterClient.GetParam("Strip[0].Mute"));
-            var isMuted2 = Convert.ToBoolean(_voiceMeterClient.GetParam("Strip[1].Mute"));
-            return isMuted1 && isMuted2
-                ? MicState.On
-                : MicState.Off;
+            foreach (var (name, expected) in _config.CheckIsOff)
+            {
+                var actualValue = _voiceMeterClient.GetParam(name);
+                var expectedValue = float.Parse(expected);
+                if (Math.Abs(actualValue - expectedValue) > 0.01f)
+                {
+                    return MicState.On;
+                }
+            }
+
+            return MicState.Off;
         }
     }
 

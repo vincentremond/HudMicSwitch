@@ -4,12 +4,6 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
-  <ItemGroup>
-    <None Update="config.yml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
