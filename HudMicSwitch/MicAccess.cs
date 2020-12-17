@@ -1,44 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
+using HudMicSwitch.Lib;
 
 namespace HudMicSwitch
 {
     internal class MicAccess : IDisposable
     {
-        private readonly VoiceMeterClient _voiceMeterClient;
+        private readonly VoiceMeeterClient _voiceMeeterClient;
         private readonly Config _config;
 
         public MicAccess(Config config)
         {
             _config = config;
-            _voiceMeterClient = new VoiceMeterClient(null);
+            _voiceMeeterClient = new VoiceMeeterClient(null);
         }
 
         public void MicOn() => SetVariables(_config.On);
         public void MicOff() => SetVariables(_config.Off);
 
-        private void SetVariables(IDictionary<string, string> variables)
+        private void SetVariables(IReadOnlyDictionary<string, string> variables)
         {
             foreach (var (key, value) in variables)
             {
                 if (float.TryParse(value, out var floatValue))
                 {
-                    _voiceMeterClient.SetParam(key, floatValue);
+                    _voiceMeeterClient.SetParam(key, floatValue);
                 }
                 else
                 {
-                    _voiceMeterClient.SetParam(key, value);
+                    _voiceMeeterClient.SetParam(key, value);
                 }
             }
         }
 
-        public void Dispose() => _voiceMeterClient.Dispose();
+        public void Dispose() => _voiceMeeterClient.Dispose();
 
         public MicState GetCurrentState()
         {
             foreach (var (name, expected) in _config.CheckIsOff)
             {
-                var actualValue = _voiceMeterClient.GetParam(name);
+                var actualValue = _voiceMeeterClient.GetParam(name);
                 var expectedValue = float.Parse(expected);
                 if (Math.Abs(actualValue - expectedValue) > 0.01f)
                 {
@@ -47,6 +48,11 @@ namespace HudMicSwitch
             }
 
             return MicState.Off;
+        }
+
+        public void ResetConfig()
+        {
+            SetVariables(_config.Reset);
         }
     }
 

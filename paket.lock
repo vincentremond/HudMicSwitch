@@ -8,4 +8,3 @@ NUGET
     NHotkey.WindowsForms (2.1)
       NHotkey (>= 2.1)
     System.Windows.Forms (4.0)
-    YamlDotNet (9.1)

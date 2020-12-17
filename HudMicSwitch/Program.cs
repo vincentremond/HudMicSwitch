@@ -1,6 +1,8 @@
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Windows.Forms;
 using CommandLine;
@@ -19,7 +21,7 @@ namespace HudMicSwitch
         {
             try
             {
-                var config = ReadConfig("config.yml");
+                var config = ReadConfig("Config.json") ?? throw new Exception("Failed to read configuration");
             
                 WaitSomeTime(options.SecondsToWait);
                 KillOtherInstances();
@@ -35,7 +37,11 @@ namespace HudMicSwitch
             }
         }
 
-        private static Config ReadConfig(string configYml) => Yaml.GetFromFile<Config>(configYml);
+        private static Config? ReadConfig(string configJson)
+        {
+            var contents = File.ReadAllText(configJson);
+            return JsonSerializer.Deserialize<Config>(contents);
+        }
 
         private static void WaitSomeTime(in int secondsToWait)
         {

@@ -7,4 +7,3 @@ nuget Microsoft.Extensions.Logging.Abstractions
 nuget NHotkey
 nuget NHotkey.WindowsForms
 nuget System.Windows.Forms
-nuget YamlDotNet

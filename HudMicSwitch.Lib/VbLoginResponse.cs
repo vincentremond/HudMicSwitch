@@ -1,4 +1,4 @@
-﻿namespace HudMicSwitch
+﻿namespace HudMicSwitch.Lib
 {
     internal enum VbLoginResponse
     {
