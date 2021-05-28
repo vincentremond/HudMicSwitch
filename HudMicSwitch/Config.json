@@ -9,7 +9,7 @@
     "Strip[2].device.wdm": "CABLE Output (VB-Audio Virtual Cable)",
     "Strip[2].A1": "1",
     "Strip[2].B1": "0",
-    "Bus[0].device.wdm": "QC35 (Q35 Stereo)",
+    "Bus[0].device.wdm": "Casque (WH-1000XM4 Stereo)",
     "Bus[1].device.wdm": "",
     "Bus[2].device.wdm": ""
   },
