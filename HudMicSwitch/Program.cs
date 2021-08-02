@@ -2,10 +2,11 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
 using System.Threading;
 using System.Windows.Forms;
 using CommandLine;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace HudMicSwitch
 {
@@ -22,14 +23,14 @@ namespace HudMicSwitch
             try
             {
                 var config = ReadConfig("Config.json") ?? throw new Exception("Failed to read configuration");
-            
+
                 WaitSomeTime(options.SecondsToWait);
                 KillOtherInstances();
                 using var micAccess = new MicAccess(config);
                 Application.SetHighDpiMode(HighDpiMode.SystemAware);
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new Form1(micAccess));
+                Application.Run(new Form1(micAccess, config));
             }
             catch (Exception e)
             {
@@ -40,7 +41,10 @@ namespace HudMicSwitch
         private static Config? ReadConfig(string configJson)
         {
             var contents = File.ReadAllText(configJson);
-            return JsonSerializer.Deserialize<Config>(contents);
+            var jsonSerializerSettings = new JsonSerializerSettings();
+            jsonSerializerSettings.Converters.Add(new StringEnumConverter()); 
+            var config = JsonConvert.DeserializeObject<Config>(contents, jsonSerializerSettings);
+            return config;
         }
 
         private static void WaitSomeTime(in int secondsToWait)

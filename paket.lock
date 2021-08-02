@@ -4,6 +4,7 @@ NUGET
   remote: https://api.nuget.org/v3/index.json
     CommandLineParser (2.8)
     Microsoft.Extensions.Logging.Abstractions (5.0)
+    Newtonsoft.Json (13.0.1)
     NHotkey (2.1)
     NHotkey.WindowsForms (2.1)
       NHotkey (>= 2.1)

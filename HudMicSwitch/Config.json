@@ -1,6 +1,21 @@
 ﻿{
+  "ToggleMuteHotkeys": [
+    [
+      "Pause"
+    ],
+    [
+      "Alt",
+      "Oem7"
+    ]
+  ],
+  "ResetConfigHotkeys": [
+    [
+      "Alt",
+      "Pause"
+    ]
+  ],
   "Reset": {
-    "Strip[0].device.wdm": "Microphone (2- Yeti X WoW Edition)",
+    "Strip[0].device.wdm": "Microphone (Yeti X WoW Edition)",
     "Strip[0].A1": "0",
     "Strip[0].B1": "1",
     "Strip[1].device.wdm": "Réseau de microphone (Realtek(R) Audio)",

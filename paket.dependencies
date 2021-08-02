@@ -4,6 +4,7 @@ storage: none
 framework: net5.0
 nuget CommandLineParser
 nuget Microsoft.Extensions.Logging.Abstractions
+nuget NewtonSoft.Json
 nuget NHotkey
 nuget NHotkey.WindowsForms
 nuget System.Windows.Forms

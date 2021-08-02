@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using NHotkey;
 using NHotkey.WindowsForms;
@@ -15,7 +16,7 @@ namespace HudMicSwitch
         // Hide from alt-tab
         protected override CreateParams CreateParams => base.CreateParams.With(createParams => createParams.ExStyle |= 0x80);
 
-        public Form1(MicAccess micAccess)
+        public Form1(MicAccess micAccess, Config config)
         {
             _micAccess = micAccess;
             TopMost = true;
@@ -29,9 +30,22 @@ namespace HudMicSwitch
                 Enabled = false,
             };
             _blinkTimer.Tick += BlinkTimerOnTick;
-            HotkeyManager.Current.AddOrReplace("ToggleMute", Keys.Pause, noRepeat: true, ToggleMute);
-            HotkeyManager.Current.AddOrReplace("ResetConfig", Keys.Alt | Keys.Pause, noRepeat: true, ResetConfig);
+            for (var index = 0; index < config.ToggleMuteHotkeys.Length; index++)
+            {
+                HotkeyManager.Current.AddOrReplace($"ToggleMute{index}", Aggregate(config.ToggleMuteHotkeys[index]), noRepeat: true, ToggleMute);
+            }
+
+            for (var index = 0; index < config.ResetConfigHotkeys.Length; index++)
+            {
+                HotkeyManager.Current.AddOrReplace($"ResetConfig{index}", Aggregate(config.ResetConfigHotkeys[index]), noRepeat: true, ResetConfig);
+            }
+
             SetCurrentState(_micAccess.GetCurrentState());
+        }
+
+        private Keys Aggregate(Keys[] keys)
+        {
+            return keys.Aggregate(Keys.None, (keys1, keys2) => keys1 | keys2);
         }
 
         private void BlinkTimerOnTick(object? sender, EventArgs e) => label1.BackColor = Invert(label1.BackColor, Color.Red, Color.Yellow);
@@ -93,7 +107,7 @@ namespace HudMicSwitch
             };
 
         private void label1_Click(object _, MouseEventArgs eventArgs) =>
-            ((Action) (eventArgs.Button switch
+            ((Action)(eventArgs.Button switch
             {
                 MouseButtons.Left => ToggleMute,
                 MouseButtons.Right => Close,
