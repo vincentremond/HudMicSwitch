@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using HudMicSwitch.Lib;
+using NativeWifi;
 
 namespace HudMicSwitch
 {
@@ -52,7 +54,20 @@ namespace HudMicSwitch
 
         public void ResetConfig()
         {
-            SetVariables(_config.Reset);
+            var currentWifiSsid = GetCurrentWifiSsid();
+            var resetConfigByWifi =
+                _config.Reset.FirstOrDefault(r => r.Wifi.Contains(currentWifiSsid))?.Setup
+                ?? throw new InvalidOperationException();
+
+            SetVariables(resetConfigByWifi);
+        }
+
+        private string? GetCurrentWifiSsid()
+        {
+            var wlanInterface = new WlanClient()
+                .Interfaces?
+                .FirstOrDefault();
+            return wlanInterface?.CurrentConnection.wlanAssociationAttributes.dot11Ssid.AsString();
         }
     }
 

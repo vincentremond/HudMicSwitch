@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+using System.Text;
+using NativeWifi;
 
 namespace HudMicSwitch
 {
@@ -11,6 +10,15 @@ namespace HudMicSwitch
         {
             set(obj);
             return obj;
+        }
+
+        public static string AsString(this Wlan.Dot11Ssid ssid)
+        {
+            return new string(
+                value: Encoding.UTF8.GetChars(ssid.SSID),
+                startIndex: 0,
+                length: (int)ssid.SSIDLength
+            );
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -30,20 +31,20 @@ namespace HudMicSwitch
                 Enabled = false,
             };
             _blinkTimer.Tick += BlinkTimerOnTick;
-            for (var index = 0; index < config.ToggleMuteHotkeys.Length; index++)
+            for (var index = 0; index < config.ToggleMuteHotkeys.Count; index++)
             {
-                HotkeyManager.Current.AddOrReplace($"ToggleMute{index}", Aggregate(config.ToggleMuteHotkeys[index]), noRepeat: true, ToggleMute);
+                HotkeyManager.Current.AddOrReplace($"ToggleMute{index}", Aggregate(config.ToggleMuteHotkeys.ElementAt(index)), noRepeat: true, ToggleMute);
             }
 
-            for (var index = 0; index < config.ResetConfigHotkeys.Length; index++)
+            for (var index = 0; index < config.ResetConfigHotkeys.Count; index++)
             {
-                HotkeyManager.Current.AddOrReplace($"ResetConfig{index}", Aggregate(config.ResetConfigHotkeys[index]), noRepeat: true, ResetConfig);
+                HotkeyManager.Current.AddOrReplace($"ResetConfig{index}", Aggregate(config.ResetConfigHotkeys.ElementAt(index)), noRepeat: true, ResetConfig);
             }
 
             SetCurrentState(_micAccess.GetCurrentState());
         }
 
-        private Keys Aggregate(Keys[] keys)
+        private Keys Aggregate(IReadOnlyCollection<Keys> keys)
         {
             return keys.Aggregate(Keys.None, (keys1, keys2) => keys1 | keys2);
         }
@@ -93,7 +94,7 @@ namespace HudMicSwitch
         private void ResetConfig(object? sender, HotkeyEventArgs e)
         {
             _micAccess.ResetConfig();
-            MessageBox.Show("Configuration has been reset", "Config reset", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(@"Configuration has been reset", @"Config reset", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void ToggleMute() => SetCurrentState(Invert(_currentState));

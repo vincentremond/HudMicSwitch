@@ -23,7 +23,8 @@ namespace HudMicSwitch.Lib
                 VbLoginResponse.Ok => "Attached.",
                 VbLoginResponse.OkVoiceMeeterNotRunning => "Attached but VoiceMeeter is not running.",
                 VbLoginResponse.AlreadyLoggedIn => "Attached. Was already logged in",
-                _ => throw new InvalidOperationException("Bad response from VoiceMeeter: " + loginResponse),
+                VbLoginResponse.NoClient => "No client",
+                _ => throw new InvalidOperationException($"Bad response from VoiceMeeter: {loginResponse}"),
             };
             _logger?.LogInformation(info);
         }

@@ -1,8 +1,8 @@
 ﻿{
   "ToggleMuteHotkeys": [
-    [
-      "Pause"
-    ],
+    //    [
+    //      "Pause"
+    //    ],
     [
       "Alt",
       "Oem7"
@@ -14,20 +14,50 @@
       "Pause"
     ]
   ],
-  "Reset": {
-    "Strip[0].device.wdm": "Microphone (Yeti X WoW Edition)",
-    "Strip[0].A1": "0",
-    "Strip[0].B1": "1",
-    "Strip[1].device.wdm": "Réseau de microphone (Realtek(R) Audio)",
-    "Strip[1].A1": "0",
-    "Strip[1].B1": "0",
-    "Strip[2].device.wdm": "CABLE Output (VB-Audio Virtual Cable)",
-    "Strip[2].A1": "1",
-    "Strip[2].B1": "0",
-    "Bus[0].device.wdm": "Casque (WH-1000XM4 Stereo)",
-    "Bus[1].device.wdm": "",
-    "Bus[2].device.wdm": ""
-  },
+  "Reset": [
+    {
+      "Wifi": [
+        "D-Edge-Staff",
+        "D-Edge-Guest"
+      ],
+      "Setup": {
+        "Strip[0].device.wdm": "Réseau de microphone (Realtek(R) Audio)",
+        "Strip[0].A1": "0",
+        "Strip[0].B1": "1",
+        "Strip[1].device.wdm": "",
+        "Strip[1].A1": "0",
+        "Strip[1].B1": "0",
+        "Strip[2].device.wdm": "CABLE Output (VB-Audio Virtual Cable)",
+        "Strip[2].A1": "1",
+        "Strip[2].B1": "0",
+        "Bus[0].device.wdm": "Casque (Q35 Stereo)",
+        "Bus[1].device.wdm": "",
+        "Bus[2].device.wdm": ""
+      }
+    },
+    {
+      "Wifi": [
+        "Nueva-Rezo",
+        "Nueva-Rezo-5g",
+        "Ext-Nueva-Rezo",
+        "Ext-Nueva-Rezo-5g"
+      ],
+      "Setup": {
+        "Strip[0].device.wdm": "Microphone (Yeti X WoW Edition)",
+        "Strip[0].A1": "0",
+        "Strip[0].B1": "1",
+        "Strip[1].device.wdm": "Réseau de microphone (Realtek(R) Audio)",
+        "Strip[1].A1": "0",
+        "Strip[1].B1": "0",
+        "Strip[2].device.wdm": "CABLE Output (VB-Audio Virtual Cable)",
+        "Strip[2].A1": "1",
+        "Strip[2].B1": "0",
+        "Bus[0].device.wdm": "Casque (WH-1000XM4 Stereo)",
+        "Bus[1].device.wdm": "",
+        "Bus[2].device.wdm": ""
+      }
+    }
+  ],
   "On": {
     "Strip[0].Mute": "0",
     "Strip[1].Mute": "0",
