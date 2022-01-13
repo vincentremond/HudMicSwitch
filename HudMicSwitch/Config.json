@@ -40,7 +40,8 @@
         "Nueva-Rezo",
         "Nueva-Rezo-5g",
         "Ext-Nueva-Rezo",
-        "Ext-Nueva-Rezo-5g"
+        "Ext-Nueva-Rezo-5g",
+        null
       ],
       "Setup": {
         "Strip[0].device.wdm": "Microphone (Yeti X WoW Edition)",

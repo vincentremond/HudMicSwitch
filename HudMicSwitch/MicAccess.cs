@@ -66,7 +66,8 @@ namespace HudMicSwitch
         {
             var wlanInterface = new WlanClient()
                 .Interfaces?
-                .FirstOrDefault();
+                .FirstOrDefault(w => w.InterfaceState != Wlan.WlanInterfaceState.Connected);
+
             return wlanInterface?.CurrentConnection.wlanAssociationAttributes.dot11Ssid.AsString();
         }
     }

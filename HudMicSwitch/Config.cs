@@ -13,7 +13,7 @@ namespace HudMicSwitch
     );
 
     internal record LocationConfiguration(
-        IReadOnlyCollection<string> Wifi,
+        IReadOnlyCollection<string?> Wifi,
         IReadOnlyDictionary<string, string> Setup
     );
 }
