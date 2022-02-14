@@ -47,7 +47,7 @@
         "Strip[0].device.wdm": "Microphone (Yeti X WoW Edition)",
         "Strip[0].A1": "0",
         "Strip[0].B1": "1",
-        "Strip[1].device.wdm": "Réseau de microphone (Realtek(R) Audio)",
+        "Strip[1].device.wdm": "",
         "Strip[1].A1": "0",
         "Strip[1].B1": "0",
         "Strip[2].device.wdm": "CABLE Output (VB-Audio Virtual Cable)",
