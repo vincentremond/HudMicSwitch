@@ -1,4 +1,4 @@
-﻿{
+﻿ {
   "ToggleMuteHotkeys": [
     //    [
     //      "Pause"
@@ -12,6 +12,11 @@
     [
       "Alt",
       "Pause"
+    ],
+    [
+      "Control",
+      "Alt",
+      "Oem7"
     ]
   ],
   "Reset": [
