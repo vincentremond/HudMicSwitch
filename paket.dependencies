@@ -1,7 +1,7 @@
 source https://api.nuget.org/v3/index.json
 
 storage: none
-framework: net5.0
+framework: auto-detect
 nuget CommandLineParser
 nuget managedwifi
 nuget Microsoft.Extensions.Logging.Abstractions
@@ -9,3 +9,4 @@ nuget NewtonSoft.Json
 nuget NHotkey
 nuget NHotkey.WindowsForms
 nuget System.Windows.Forms
+nuget YamlDotNet

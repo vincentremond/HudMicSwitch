@@ -22,7 +22,7 @@ namespace HudMicSwitch
         {
             try
             {
-                var config = ReadConfig("Config.json") ?? throw new Exception("Failed to read configuration");
+                var config = ReadConfig("Config.yaml") ?? throw new Exception("Failed to read configuration");
 
                 WaitSomeTime(options.SecondsToWait);
                 KillOtherInstances();
@@ -40,11 +40,20 @@ namespace HudMicSwitch
 
         private static Config? ReadConfig(string configJson)
         {
-            var contents = File.ReadAllText(configJson);
+            var yamlContents = File.ReadAllText(configJson);
+            var jsonContents = ConvertYamlToJson(yamlContents);
+            Console.WriteLine(jsonContents);
             var jsonSerializerSettings = new JsonSerializerSettings();
             jsonSerializerSettings.Converters.Add(new StringEnumConverter()); 
-            var config = JsonConvert.DeserializeObject<Config>(contents, jsonSerializerSettings);
+            var config = JsonConvert.DeserializeObject<Config>(jsonContents, jsonSerializerSettings);
             return config;
+        }
+
+        private static string ConvertYamlToJson(string contents)
+        {
+            var deserializer = new YamlDotNet.Serialization.Deserializer();
+            var yamlObject = deserializer.Deserialize<object>(contents);
+            return JsonConvert.SerializeObject(yamlObject, Formatting.Indented);
         }
 
         private static void WaitSomeTime(in int secondsToWait)

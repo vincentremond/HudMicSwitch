@@ -25,33 +25,34 @@ namespace HudMicSwitch
             TransparencyKey = Color.White;
             InitializeComponent();
             (StartPosition, Location) = GetPosition(Width);
-            _blinkTimer = new Timer()
+            _blinkTimer = new Timer
             {
                 Interval = 1000,
                 Enabled = false,
             };
             _blinkTimer.Tick += BlinkTimerOnTick;
-            for (var index = 0; index < config.ToggleMuteHotkeys.Count; index++)
-            {
-                HotkeyManager.Current.AddOrReplace($"ToggleMute{index}", Aggregate(config.ToggleMuteHotkeys.ElementAt(index)), noRepeat: true, ToggleMute);
-            }
 
-            for (var index = 0; index < config.ResetConfigHotkeys.Count; index++)
+            HotkeyManager.Current.AddOrReplace($"ToggleMute", config.ToggleMuteHotkey.GetHotKey(), noRepeat: true, ToggleMute);
+            
+            config.AutoConfigs.ForEach((autoConfig, index) =>
             {
-                HotkeyManager.Current.AddOrReplace($"ResetConfig{index}", Aggregate(config.ResetConfigHotkeys.ElementAt(index)), noRepeat: true, ResetConfig);
-            }
-
+                var mapping = (
+                    from l in autoConfig.Locations
+                    let locationId = l.Key
+                    let wifiSsids = l.Value
+                    from w in wifiSsids
+                    let wifiSsid = (string)(w ?? string.Empty)
+                    select (wifiSsid, locationId)
+                ).ToDictionary();
+                HotkeyManager.Current.AddOrReplace($"ResetConfig{index}", autoConfig.HotKey.GetHotKey(), noRepeat: true, (o, args) => ResetConfig(mapping));
+            });
+            
             SetCurrentState(_micAccess.GetCurrentState());
-        }
-
-        private Keys Aggregate(IReadOnlyCollection<Keys> keys)
-        {
-            return keys.Aggregate(Keys.None, (keys1, keys2) => keys1 | keys2);
         }
 
         private void BlinkTimerOnTick(object? sender, EventArgs e) => label1.BackColor = Invert(label1.BackColor, Color.Red, Color.Yellow);
 
-        private Color Invert(in Color currentColor, in Color aColor, in Color bColor) => currentColor == aColor ? bColor : aColor;
+        private static Color Invert(in Color currentColor, in Color aColor, in Color bColor) => currentColor == aColor ? bColor : aColor;
 
         private (FormStartPosition StartPosition, Point Location) GetPosition(int width)
         {
@@ -91,9 +92,9 @@ namespace HudMicSwitch
 
         private void ToggleMute(object? _, HotkeyEventArgs __) => ToggleMute();
 
-        private void ResetConfig(object? sender, HotkeyEventArgs e)
+        private void ResetConfig(IReadOnlyDictionary<string, string> autoConfigLocations)
         {
-            _micAccess.ResetConfig();
+            _micAccess.ResetConfig(autoConfigLocations);
             MessageBox.Show(@"Configuration has been reset", @"Config reset", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

@@ -1,12 +1,17 @@
 STORAGE: NONE
-RESTRICTION: == net5.0
+RESTRICTION: || (== net5.0) (== net5.0-windows7.0)
 NUGET
   remote: https://api.nuget.org/v3/index.json
     CommandLineParser (2.8)
     managedwifi (1.1)
-    Microsoft.Extensions.Logging.Abstractions (5.0)
+    Microsoft.Extensions.Logging.Abstractions (6.0.1)
+      System.Buffers (>= 4.5.1)
+      System.Memory (>= 4.5.4)
     Newtonsoft.Json (13.0.1)
     NHotkey (2.1)
     NHotkey.WindowsForms (2.1)
       NHotkey (>= 2.1)
+    System.Buffers (4.5.1)
+    System.Memory (4.5.4)
     System.Windows.Forms (4.0)
+    YamlDotNet (11.2.1)

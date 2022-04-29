@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <None Update="Config.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="Config.yaml" CopyToOutputDirectory="Always" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HudMicSwitch.Lib\HudMicSwitch.Lib.csproj" />

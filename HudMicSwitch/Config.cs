@@ -4,16 +4,17 @@ using System.Windows.Forms;
 namespace HudMicSwitch
 {
     internal record Config(
-        IReadOnlyCollection<IReadOnlyCollection<Keys>> ToggleMuteHotkeys,
-        IReadOnlyCollection<IReadOnlyCollection<Keys>> ResetConfigHotkeys,
-        IReadOnlyCollection<LocationConfiguration> Reset,
+        IReadOnlyCollection<Keys> ToggleMuteHotkey,
+        IReadOnlyCollection<AutoConfig> AutoConfigs,
+        IReadOnlyDictionary<string, string> Defaults,
+        IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> Configurations,
         IReadOnlyDictionary<string, string> On,
         IReadOnlyDictionary<string, string> Off,
         IReadOnlyDictionary<string, string> CheckIsOff
     );
 
-    internal record LocationConfiguration(
-        IReadOnlyCollection<string?> Wifi,
-        IReadOnlyDictionary<string, string> Setup
+    internal record AutoConfig(
+        IReadOnlyCollection<Keys> HotKey,
+        IReadOnlyDictionary<string, IReadOnlyCollection<string?>> Locations
     );
 }

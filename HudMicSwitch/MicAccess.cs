@@ -52,23 +52,27 @@ namespace HudMicSwitch
             return MicState.Off;
         }
 
-        public void ResetConfig()
+        public void ResetConfig(IReadOnlyDictionary<string, string> autoConfigLocations)
         {
             var currentWifiSsid = GetCurrentWifiSsid();
-            var resetConfigByWifi =
-                _config.Reset.FirstOrDefault(r => r.Wifi.Contains(currentWifiSsid))?.Setup
-                ?? throw new InvalidOperationException();
+            var locationId = autoConfigLocations.GetValueOrDefault(currentWifiSsid)
+                ?? throw new InvalidOperationException($"Failed to determine location from Wifi Ssid {currentWifiSsid}");
 
-            SetVariables(resetConfigByWifi);
+            var locationConfiguration = _config.Configurations.GetValueOrDefault(locationId)
+                    ?? throw new InvalidOperationException($"Failed to find location configuration from id {locationId}");
+
+            var mergedConfiguration = _config.Defaults.MergeWith(locationConfiguration);
+
+            SetVariables(mergedConfiguration);
         }
 
-        private string? GetCurrentWifiSsid()
+        private string GetCurrentWifiSsid()
         {
             var wlanInterface = new WlanClient()
                 .Interfaces?
                 .FirstOrDefault(w => w.InterfaceState == Wlan.WlanInterfaceState.Connected);
 
-            return wlanInterface?.CurrentConnection.wlanAssociationAttributes.dot11Ssid.AsString();
+            return wlanInterface?.CurrentConnection.wlanAssociationAttributes.dot11Ssid.AsString() ?? string.Empty;
         }
     }
 
