@@ -10,35 +10,36 @@ AutoConfigs:
   - Shift
   - Oem7
   Locations:
-    Work1-Wired:
+    Work-PluggedHeadphones:
     - D-Edge-Staff
     - D-Edge-Guest
+    - ''
 
 - HotKey:
   - Control
   - Alt
   - Oem7
   Locations:
-    Work1-Wireless:
+    Work-UnpluggedHeadphones:
     - D-Edge-Staff
     - D-Edge-Guest
+    - ''
     Home:
     - Nueva-Rezo
     - Nueva-Rezo-5g
     - Ext-Nueva-Rezo
     - Ext-Nueva-Rezo-5g
-    - ''
 
 Configurations:
   Home:
     Strip[0].device.wdm: Microphone (Yeti X WoW Edition)
     Bus[0].device.wdm: Casque (WH-1000XM4 Stereo)
     Bus[0].Gain: 0
-  Work1-Wireless:
+  Work-UnpluggedHeadphones:
     Strip[0].device.wdm: Réseau de microphones (Realtek(R) Audio)
     Bus[0].device.wdm: Casque (Q35 Stereo)
     Bus[0].Gain: 0
-  Work1-Wired:
+  Work-PluggedHeadphones:
     Strip[0].device.wdm: External Mic (Realtek(R) Audio)
     Bus[0].device.wdm: Realtek HD Audio 2nd output (Realtek(R) Audio)
     Bus[0].Gain: -12
