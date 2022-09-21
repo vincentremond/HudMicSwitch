@@ -1,6 +1,6 @@
 ToggleMuteHotkey:
 - Alt
-- Oem7
+- Oem3
 
 AutoConfigs:
 
@@ -8,7 +8,7 @@ AutoConfigs:
   - Control
   - Alt
   - Shift
-  - Oem7
+  - Oem3
   Locations:
     Work-PluggedHeadphones:
     - D-Edge-Staff
@@ -18,7 +18,7 @@ AutoConfigs:
 - HotKey:
   - Control
   - Alt
-  - Oem7
+  - Oem3
   Locations:
     Work-UnpluggedHeadphones:
     - D-Edge-Staff
