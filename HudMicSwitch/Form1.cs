@@ -95,7 +95,6 @@ namespace HudMicSwitch
         private void ResetConfig(IReadOnlyDictionary<string, string> autoConfigLocations)
         {
             _micAccess.ResetConfig(autoConfigLocations);
-            MessageBox.Show(@"Configuration has been reset", @"Config reset", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void ToggleMute() => SetCurrentState(Invert(_currentState));
