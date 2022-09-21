@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace HudMicSwitch
 {
@@ -30,18 +31,21 @@ namespace HudMicSwitch
         /// </summary>
         private void InitializeComponent()
         {
+            var width = 50;
+            var height = 18;
+
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.3F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.label1.ForeColor = System.Drawing.Color.Red;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 30);
+            this.label1.Size = new System.Drawing.Size(width, height);
             this.label1.TabIndex = 2;
-            this.label1.Text = "label1";
+            this.label1.Text = DateTime.Now.ToString(_timeFormat);
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label1.MouseClick += new MouseEventHandler(this.label1_Click);
             // 
@@ -49,7 +53,7 @@ namespace HudMicSwitch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(70, 30);
+            this.ClientSize = new System.Drawing.Size(width, height);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";

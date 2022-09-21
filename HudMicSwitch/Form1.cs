@@ -10,9 +10,11 @@ namespace HudMicSwitch
 {
     internal sealed partial class Form1 : Form
     {
+        private const string _timeFormat = "HH:mm";
+
         private MicState _currentState;
         private readonly MicAccess _micAccess;
-        private readonly Timer _blinkTimer;
+        private Timer _blinkTimer;
 
         // Hide from alt-tab
         protected override CreateParams CreateParams => base.CreateParams.With(createParams => createParams.ExStyle |= 0x80);
@@ -25,12 +27,8 @@ namespace HudMicSwitch
             TransparencyKey = Color.White;
             InitializeComponent();
             (StartPosition, Location) = GetPosition(Width);
-            _blinkTimer = new Timer
-            {
-                Interval = 1000,
-                Enabled = false,
-            };
-            _blinkTimer.Tick += BlinkTimerOnTick;
+            _blinkTimer = InitializeTimer(1000, false, BlinkTimerOnTick);
+            _ = InitializeTimer(1000, true, TimeTimerOnTick);
 
             HotkeyManager.Current.AddOrReplace($"ToggleMute", config.ToggleMuteHotkey.GetHotKey(), noRepeat: true, ToggleMute);
             
@@ -50,7 +48,26 @@ namespace HudMicSwitch
             SetCurrentState(_micAccess.GetCurrentState());
         }
 
-        private void BlinkTimerOnTick(object? sender, EventArgs e) => label1.BackColor = Invert(label1.BackColor, Color.Red, Color.Yellow);
+        private Timer InitializeTimer(int interval, bool enabled, EventHandler handler)
+        {
+            var timer = new Timer
+            {
+                Interval = interval,
+                Enabled = enabled,
+            };
+            timer.Tick += handler;
+            return timer;
+        }
+
+        private void BlinkTimerOnTick(object? sender, EventArgs e)
+        {
+            label1.BackColor = Invert(label1.BackColor, Color.Red, Color.Yellow);
+        }
+        
+        private void TimeTimerOnTick(object? sender, EventArgs e)
+        {
+            label1.Text = DateTime.Now.ToString(_timeFormat);
+        }
 
         private static Color Invert(in Color currentColor, in Color aColor, in Color bColor) => currentColor == aColor ? bColor : aColor;
 
@@ -65,17 +82,15 @@ namespace HudMicSwitch
         private void SetCurrentState(MicState currentState)
         {
             _currentState = currentState;
-            (Action UpdateAction, string Emoji, Color Color, int Height) update = currentState switch
+            (Action UpdateAction, Color Color) update = currentState switch
             {
-                MicState.On => (SetMicOn, "🎤", Color.Red, 40),
-                MicState.Off => (SetMicOff, "", Color.Gray, 5),
+                MicState.On => (UpdateAction: SetMicOn, Color: Color.Red),
+                MicState.Off => (UpdateAction: SetMicOff, Color: Color.LightGray),
                 _ => throw new ArgumentOutOfRangeException(nameof(currentState), currentState, null)
             };
             update.UpdateAction();
-            label1.Text = update.Emoji;
             label1.ForeColor = Color.Black;
             label1.BackColor = update.Color;
-            label1.Height = update.Height;
         }
 
         private void SetMicOn()
