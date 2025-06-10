@@ -1,10 +1,9 @@
-﻿namespace HudMicSwitch.Lib
+﻿namespace HudMicSwitch.Lib;
+
+internal enum VbLoginResponse
 {
-    internal enum VbLoginResponse
-    {
-        Ok = 0,
-        OkVoiceMeeterNotRunning = 1,
-        NoClient = -1,
-        AlreadyLoggedIn = -2,
-    }
+    Ok = 0,
+    OkVoiceMeeterNotRunning = 1,
+    NoClient = -1,
+    AlreadyLoggedIn = -2,
 }
